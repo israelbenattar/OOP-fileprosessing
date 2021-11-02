@@ -1,0 +1,64 @@
+israelbenattar
+
+
+=============================
+=      File description     =
+=============================
+fileprocessing package -
+
+filesprocessing.exception - a subPackage with the exception for the CommandFileExecute and the
+DirectoryProcessor.
+
+filesprocessing.filter package - a subPackage with all the filter types and the filterFactory.
+
+filesprocessing.order package - a subPackage with all the order types and the orderFactory.
+
+filesprocessing.DirectoryProcessor - an class withe an main method that run all the program.
+
+=============================
+=          Design           =
+=============================
+
+1. Explain all your design choices in detail.
+
+i chose to divide my code to three different packages since it is implements modular composability and each
+part of the program can be reused to other purposes. Each package has it's own purpose, and works
+individually without being depended on the others.
+I created a factory for orders and for filters (separated ones), therefor it implements the open/closed
+principle according to it there is just one place that needed to be changed if we want to add a new
+filesprocessing.filter for example (which is the factory itself).
+In the filesprocessing.filter I created an interface, which all other filters implement so
+that all classes are the same type (Filer) ,and in the filesprocessing.order I created three comparators for
+each kind of order and a order class that receive an comparator for the right kind of order.
+In addition, I created a wrapper class for filesprocessing.filter and for order, this way I add functionality
+to the objects, and in this program is used we need to use REVERSED order and NOT filesprocessing.filter
+easily. The wrappers helps us to prevent repeating code and the code is more clear to understand.
+In fileprocessing I put only the DirectoryProcessor that contains only the main method that runs the whole
+program and the CommandFileExecute that receives a command file and returns a list of subsections.
+
+
+2. Describe the exceptions hierarchy you used in order to handle errors in the program. Explain
+the considerations that made you choose that specific design.
+
+In order to handle the errors in the program I used two types of exceptions- the first type is made to
+handle errors in the files such as wrong filesprocessing.filter/ order and used to print warnings to the
+screen but the program continue running. this kind of exceptions is in the packages of filesprocessing.filter
+and order, because it is directly connected to the files in the packages. the other type is in a sub-package
+of exception in fileprocessing because it handle errors that occur while trying to read the file (and it
+happens in DirectoryProcessor which is in the same package). the second type makes the program collapse.
+I chose this design according to the package exceptions that we saw in the lectures.
+
+=============================
+=  Implementation details   =
+=============================
+
+3. How did you sort your matched files? Did you use a data structure for this purpose? If so,
+what data structure and why?
+
+I used margeSort to sort the files in the list as needed, to compare files according to the type of order I
+built three comparator, one for each order type and so i maintain the modularity principle. I use array as
+the data structure to save runtime and make code more efficient and convenient
+
+=============================
+=    Answers to questions   =
+=============================
